@@ -26,8 +26,8 @@
          @include('home.header')
          @include('home.slider')
       </div>
-      @include('home.why')
-      @include('home.new_arrival')
+      {{-- @include('home.why') --}}
+      {{-- @include('home.new_arrival') --}}
       @include('home.product')
       @include('home.testimonial')
       @include('home.footer')
