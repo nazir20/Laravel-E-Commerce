@@ -52,7 +52,7 @@
                             <th>RAM</th>
                             <th>SSD</th>
                             <th>Delete</th>
-                            <th>Update</th>
+                            <th>Edit</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -68,8 +68,12 @@
                                 <td>{{$product->processor_type}} {{$product->processor}}</td>
                                 <td>{{$product->ram}}</td>
                                 <td>{{$product->ssd_capacity}}</td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <a href="{{url('delete_product',$product->id)}}" style="font-size: 25px; color:#FF6D60"><i class="mdi mdi-delete-sweep"></i></a>
+                                </td>
+                                <td>
+                                    <a href="{{url('edit_product',$product->id)}}" style="font-size: 20px;color:#7149C6"><i class="mdi mdi-tooltip-edit"></i></a>
+                                </td>
                             </tr>
                           @endforeach
                         </tbody>
