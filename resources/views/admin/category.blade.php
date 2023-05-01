@@ -65,7 +65,7 @@
                                 <div class="form-group row">
                                     <label for="category" class="col-sm-3 col-form-label">Category Name</label>
                                     <div class="col-sm-9">
-                                        <input style="color: #fff" type="text" name="category" class="form-control" id="category" placeholder="Enter Category Name...">
+                                        <input style="color: #fff" type="text" name="category" class="form-control" id="category" placeholder="Enter Category Name..." required>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>

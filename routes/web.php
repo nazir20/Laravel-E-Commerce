@@ -31,3 +31,5 @@ route::get('/user/logout', [HomeController::class, 'UserLogout'])->name('user.lo
 route::get('/view_category', [AdminController::class, 'ViewCategory'])->name('admin.category');
 route::post('/add_category', [AdminController::class, 'AddCategory'])->name('admin.add_category');
 route::get('/delete_category/{id}', [AdminController::class, 'DeleteCategory']);
+route::get('/view_product', [AdminController::class, 'ViewProduct'])->name('admin.view_product');
+route::post('/add_product', [AdminController::class, 'AddProduct'])->name('admin.add_product');
