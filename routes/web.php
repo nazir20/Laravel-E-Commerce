@@ -15,16 +15,12 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-route::get('/', [HomeController::class, 'index']);
 
-
+/*
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
-    Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
+    Route::get('/', function () { return view('index');})->name('index');
 });
-
-
-route::get('/redirect', [HomeController::class,'redirect'])->name('redirect');
-route::get('/user/logout', [HomeController::class, 'UserLogout'])->name('user.logout');
+*/
 
 /* Admin Routes */
 
@@ -40,7 +36,13 @@ route::post('/update_product/{id}', [AdminController::class, 'UpdateProduct']);
 
 /* User routes */
 
-route::get('/product_details/{id}', [HomeController::class, 'ProductDetails']);
-route::get('/shop', [HomeController::class, 'ShopPage'])->name('user.shop');
-route::get('/contact', [HomeController::class, 'ContactPage'])->name('user.contact');
-route::post('/add-to-cart/{id}', [HomeController::class, 'AddToCart']);
+route::get('/', [HomeController::class, 'index']);
+route::get('/home', [HomeController::class, 'Home'])->name('home');
+route::get('/user/logout', [HomeController::class, 'UserLogout'])->name('user.logout');
+Route::get('/product_details/{id}',[HomeController::class, 'ProductDetails']);
+Route::get('/shop', [HomeController::class, 'ShopPage'])->name('user.shop');
+Route::get('/contact', [HomeController::class, 'ContactPage'])->name('user.contact');
+Route::post('/add-to-cart/{id}', [HomeController::class, 'AddToCart']);
+Route::get('/my-cart',[HomeController::class, 'CartPage'])->name('user.cart');
+Route::get('/remove-product-from-cart/{id}',[HomeController::class, 'RemoveProductFromCart']);
+Route::get('/clear-cart', [HomeController::class, 'ClearCart'])->name('user.clear_cart');

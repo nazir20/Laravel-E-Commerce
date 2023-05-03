@@ -62,46 +62,55 @@
                             <div class="header-action-icon-2">
                                 @if (Route::has('login'))
                                     @auth
-                                        <a class="mini-cart-icon" href="#">
+                                        @if ($cartData->isEmpty())
+                                        {{-- this part will be updated --}}
+                                        <a class="mini-cart-icon" href="{{route('user.cart')}}">
                                             <img alt="Surfside Media" src="user/assets/imgs/theme/icons/icon-cart.svg">
                                             <span class="pro-count blue">0</span>
                                         </a>
                                         <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                            <p>Cart is empty</p>
+                                        </div>
+                                        @else
+                                        <?php 
+                                            $product_in_cart = 0; 
+                                            $totalPrice = 0;
+                                        ?>
+                                        @foreach($cartData as $data)
+                                            <?php $product_in_cart +=1; ?>
+                                        @endforeach
+                                        <a class="mini-cart-icon" href="{{route('user.cart')}}">
+                                            <img alt="Surfside Media" src="user/assets/imgs/theme/icons/icon-cart.svg">
+                                            <span class="pro-count blue">{{$product_in_cart}}</span>
+                                        </a>
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                             <ul>
+                                                @foreach ($cartData as $cart)
                                                 <li>
                                                     <div class="shopping-cart-img">
-                                                        <a href="product-details.html"><img alt="Surfside Media" src="user/assets/imgs/shop/thumbnail-3.jpg"></a>
+                                                        <a href="{{url('product_details',$cart->product_id)}}"><img alt="Product Image" src="products_images/{{$cart->image}}"></a>
                                                     </div>
                                                     <div class="shopping-cart-title">
-                                                        <h4><a href="product-details.html">Daisy Casual Bag</a></h4>
-                                                        <h4><span>1 × </span>$800.00</h4>
+                                                        <h4><a href="{{url('product_details',$cart->product_id)}}">See Details</a></h4>
+                                                        <h4><span>{{$cart->quantity}} × </span>${{$cart->price/$cart->quantity}}</h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
                                                         <a href="#"><i class="fi-rs-cross-small"></i></a>
                                                     </div>
                                                 </li>
-                                                <li>
-                                                    <div class="shopping-cart-img">
-                                                        <a href="product-details.html"><img alt="Surfside Media" src="user/assets/imgs/shop/thumbnail-2.jpg"></a>
-                                                    </div>
-                                                    <div class="shopping-cart-title">
-                                                        <h4><a href="product-details.html">Corduroy Shirts</a></h4>
-                                                        <h4><span>1 × </span>$3200.00</h4>
-                                                    </div>
-                                                    <div class="shopping-cart-delete">
-                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                    </div>
-                                                </li>
+                                                <?php $totalPrice += $cart->price ?>
+                                                @endforeach
                                             </ul>
                                             <div class="shopping-cart-footer">
                                                 <div class="shopping-cart-total">
-                                                    <h4>Total <span>$4000.00</span></h4>
+                                                    <h4>Total <span>${{$totalPrice}}</span></h4>
                                                 </div>
                                                 <div class="shopping-cart-button">
-                                                    <a href="cart.html" class="outline">View cart</a>
+                                                    <a href="{{route('user.cart')}}" class="outline">View cart</a>
                                                     <a href="checkout.html">Checkout</a>
                                                 </div>
                                             </div>
+                                            @endif
                                         </div>
                                     
                                     @else

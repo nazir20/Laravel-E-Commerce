@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Cookie;
 
 
 class HomeController extends Controller
@@ -17,18 +18,28 @@ class HomeController extends Controller
     public function index(){
         $categories = Category::all();
         $products = Product::all();
-        return view('user.index', compact('products','categories'));
+
+        if(Auth::id()){
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.index', compact('products', 'categories', 'cartData'));
+        }else{
+            return view('user.index', compact('products', 'categories'));
+        }
     }
 
-    public function redirect(){
+    public function Home(){
 
         $userType = Auth::user()->usertype;
         if($userType == '1'){
             return view('admin.home');
         }else{
+
             $categories = Category::all();
             $products = Product::all();
-            return view('user.index', compact('products', 'categories'));
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.index', compact('products', 'categories','cartData'));
         }
 
     }
@@ -39,30 +50,55 @@ class HomeController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        Cookie::queue(Cookie::forget('XSRF-TOKEN'));
+        Cookie::queue(Cookie::forget('laravel_session'));
         return redirect('/');
     }
 
     public function ProductDetails($id)
     {
         $product = Product::find($id);
-        return view('user.product_details', compact('product'));
+
+        // check if a user is logged in
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.product_details', compact('product', 'cartData'));
+        }else{
+            return view('user.product_details', compact('product'));
+        }
     }
 
     public function ShopPage()
     {
         $categories = Category::all();
         $products = Product::all();
-        return view('user.shop', compact('products', 'categories'));
+        // check if a user is logged in
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.shop', compact('products', 'categories', 'cartData'));
+        }else{
+            return view('user.shop', compact('products', 'categories'));
+        }
+        
     }
 
     public function ContactPage()
     {
-        return view('user.contact');
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.contact',compact('cartData'));
+        }else{
+            return view('user.contact');
+        }
+
     }
 
     public function AddToCart(Request $request, $id)
     {
-        if(Auth::id()){
+        if(Auth::check()){
 
             $user = Auth::user();
             $product = Product::find($id);
@@ -107,4 +143,52 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
+
+    public function CartPage()
+    {
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.cart', compact('cartData'));
+        }else{
+            return redirect('login');
+        }
+    }
+
+    public function RemoveProductFromCart($id)
+    {
+        if (Auth::check()) {
+            $removing_product = Cart::find($id);
+            if ($removing_product) {
+                $product = Product::find($removing_product->product_id);
+                if ($product) {
+                    // Update the quantity of the product in the products table
+                    $product->quantity += $removing_product->quantity;
+                    $product->save();
+
+                    // Remove the product from the cart
+                    $removing_product->delete();
+
+                    return redirect()->route('user.cart')->with('success', 'Product removed from cart!');
+                } else {
+                    return redirect()->back()->with('error', 'Product not found!');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Product not found in cart!');
+            }
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function ClearCart()
+    {
+        if (Auth::id()) {
+            Cart::where('user_id', Auth::id())->delete();
+            return redirect()->back()->with('success', 'Cart cleared successfully!');
+        } else {
+            return redirect('login');
+        }
+    }
+
 }
