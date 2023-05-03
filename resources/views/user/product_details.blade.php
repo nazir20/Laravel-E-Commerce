@@ -15,6 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="user/assets/imgs/theme/favicon.ico">
     <link rel="stylesheet" href="user/assets/css/main.css">
     <link rel="stylesheet" href="user/assets/css/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <style>
         th{
             font-weight: bold;
@@ -24,6 +25,34 @@
         td p{
             font-size: 13px;
         }
+        	span {cursor:pointer; }
+		.number{
+			margin:10px 0;
+		}
+		.minus, .plus{
+			width:40px;
+			height:40px;
+			background:#f2f2f2;
+			border-radius:4px;
+			padding:8px 5px 8px 5px;
+			border:1px solid #ddd;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+        }
+        input{
+            height:34px;
+            width: 100px;
+            text-align: center;
+            font-size: 26px;
+            border:1px solid #ddd;
+            border-radius:4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .unclickable-input {
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -31,6 +60,12 @@
     @include('user.header')
     @include('user.mobile_header')    
     <main class="main">
+        @if(session()->has('message'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Failed!</strong> {{session()->get('message')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <section class="mt-50 mb-50">
             <div class="container">
                 <div class="row">
@@ -65,8 +100,8 @@
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand">{{$product->discount_price}}</span></ins>
-                                                <ins><span class="old-price font-md ml-15">{{$product->price}}</span></ins>
+                                                <ins><span class="text-brand">${{$product->discount_price}}</span></ins>
+                                                <ins><span class="old-price font-md ml-15">${{$product->price}}</span></ins>
                                                 <span class="save-price  font-md color3 ml-15">25% Off</span>
                                             </div>
                                         </div>
@@ -79,14 +114,24 @@
                                         </div>
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                         <div class="detail-extralink">
-                                            <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                            <div class="product-extra-link2">
-                                                <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                            </div>
+                                            <form action="{{url('add-to-cart',$product->id)}}"  method="post">
+                                                @csrf
+                                                <div class="number">
+                                                    <span class="minus">-</span>
+                                                    <input class="unclickable-input" name="quantity" type="number" value="1" min="1"/>
+                                                    <span class="plus">+</span>
+                                                </div>
+                                                <div class="product-extra-link2">
+                                                    @if($product->quantity <1)
+                                                        <p style="font-size: 12px;">
+                                                            Availability:<span class="in-stock text-danger ml-5">{{$product->quantity}} Items In Stock</span>
+                                                        </p>
+                                                        <button style="opacity: 0.5;cursor: not-allowed;" disabled type="submit" class="button button-add-to-cart">Add to cart</button>
+                                                    @else
+                                                        <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                                    @endif
+                                                </div>
+                                            </form>
                                         </div>
                                         <ul class="product-meta font-xs color-grey mt-50">
                                             <li>Availability:<span class="in-stock text-success ml-5">{{$product->quantity}} Items In Stock</span></li>
@@ -233,5 +278,23 @@
     <!-- Template  JS -->
     <script src="user/assets/js/main.js?v=3.3"></script>
     <script src="user/assets/js/shop.js?v=3.3"></script></body>
+    <script>
+        	$(document).ready(function() {
+			$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				return false;
+			});
+		});
+    </script>
 
 </html>

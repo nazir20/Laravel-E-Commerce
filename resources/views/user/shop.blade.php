@@ -20,6 +20,14 @@
     @include('user.header')
     @include('user.mobile_header')    
     <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/" rel="nofollow">Home</a>                    
+                    <span></span> Shop
+                </div>
+            </div>
+        </div>
         @include('user.products')
         @include('user.featured_brands')
     </main>

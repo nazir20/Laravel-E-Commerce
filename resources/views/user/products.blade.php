@@ -46,11 +46,11 @@
                                         </span>
                                     </div>
                                     <div class="product-price">
-                                        <span>{{$product->discount_price}}</span>
-                                        <span class="old-price">{{$product->price}}</span>
+                                        <span>${{$product->discount_price}}</span>
+                                        <span class="old-price">${{$product->price}}</span>
                                     </div>
                                     <div class="product-action-1 show">
-                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        <a href="{{url('product_details', $product->id)}}" aria-label="Add To Cart" class="action-btn hover-up"><i class="fi-rs-shopping-bag-add"></i></a>
                                     </div>
                                 </div>
                             </div>
