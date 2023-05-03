@@ -37,3 +37,7 @@ route::get('/show_product', [AdminController::class, 'ShowProduct'])->name('admi
 route::get('/delete_product/{id}', [AdminController::class, 'DeleteProduct'])->name('admin.delete_product');
 route::get('/edit_product/{id}', [AdminController::class, 'EditProduct'])->name('admin.edit_product');
 route::post('/update_product/{id}', [AdminController::class, 'UpdateProduct']);
+
+/* User routes */
+
+route::get('/product_details/{id}', [HomeController::class, 'ProductDetails']);

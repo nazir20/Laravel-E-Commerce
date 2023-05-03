@@ -30,7 +30,7 @@
                                         </a>
                                     </div>
                                     <div class="product-action-1">
-                                        <a aria-label="View Details" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                        <a aria-label="View Details" href="{{url('product_details', $product->id)}}" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                     </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
                                         <span class="hot">New</span>
@@ -40,7 +40,7 @@
                                     <div class="product-category">
                                         <a href="#">{{$product->category}}</a>
                                     </div>
-                                    <h2><a href="product-details.html">{{$product->title}}</a></h2>
+                                    <h2><a href="{{url('product_details', $product->id)}}">{{$product->title}}</a></h2>
                                     <div class="rating-result" title="90%">
                                         <span>
                                             <span>90%</span>

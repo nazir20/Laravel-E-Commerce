@@ -204,7 +204,7 @@
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                         <nav>
                             <ul>
-                                <li><a class="active" href="index.html">Home </a></li>
+                                <li><a class="active" href="{{route('redirect')}}">Home </a></li>
                                 <li><a href="about.html">About</a></li>
                                 <li><a href="shop.html">Shop</a></li>                             
                                 <li><a href="contact.html">Contact</a></li>

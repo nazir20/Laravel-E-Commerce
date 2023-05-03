@@ -37,4 +37,10 @@ class HomeController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
+
+    public function ProductDetails($id)
+    {
+        $product = Product::find($id);
+        return view('user.product_details', compact('product'));
+    }
 }
