@@ -2,7 +2,7 @@
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-top">
             <div class="mobile-header-logo">
-                <a href="index.html"><img src="user/assets/imgs/logo/logo.png" alt="logo"></a>
+                <a href="/"><img src="user/assets/imgs/logo/app_logo.png" alt="logo"></a>
             </div>
             <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                 <button class="close-style search-close">
@@ -15,7 +15,7 @@
             <div class="mobile-search search-style-3 mobile-header-border">
                 <form action="#">
                     <input type="text" placeholder="Search for items…">
-                    <button type="submit"><i class="fi-rs-search"></i></button>
+                    <button type="button"><i class="fi-rs-search"></i></button>
                 </form>
             </div>
             <div class="mobile-menu-wrap mobile-header-border">

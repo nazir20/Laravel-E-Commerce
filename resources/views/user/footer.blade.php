@@ -5,14 +5,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="widget-about font-md mb-md-5 mb-lg-0">
                         <div class="logo logo-width-1 wow fadeIn animated">
-                            <a href="index.html"><img src="user/assets/imgs/logo/logo.png" alt="logo"></a>
+                            <a href="/"><img src="user/assets/imgs/logo/app_logo.png" alt="logo"></a>
                         </div>
                         <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                         <p class="wow fadeIn animated">
-                            <strong>Address: </strong>562 Wellington Road
+                            <strong>Address: </strong>Kabaoğlu, Baki Komsuoğlu bulvarı No:515, Umuttepe, 41001 İzmit/Kocaeli
                         </p>
                         <p class="wow fadeIn animated">
-                            <strong>Phone: </strong>+1 0000-000-000
+                            <strong>Phone: </strong>+905368703456
                         </p>
                         <p class="wow fadeIn animated">
                             <strong>Email: </strong>contact@cybermart.in
@@ -35,16 +35,6 @@
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms &amp; Conditions</a></li>
                         <li><a href="#">Contact Us</a></li>                            
-                    </ul>
-                </div>
-                <div class="col-lg-2  col-md-3">
-                    <h5 class="widget-title wow fadeIn animated">My Account</h5>
-                    <ul class="footer-list wow fadeIn animated">
-                        <li><a href="my-account.html">My Account</a></li>
-                        <li><a href="#">View Cart</a></li>
-                        <li><a href="#">My Wishlist</a></li>
-                        <li><a href="#">Track My Order</a></li>                            
-                        <li><a href="#">Order</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 mob-center">

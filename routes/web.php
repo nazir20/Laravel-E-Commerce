@@ -41,3 +41,5 @@ route::post('/update_product/{id}', [AdminController::class, 'UpdateProduct']);
 /* User routes */
 
 route::get('/product_details/{id}', [HomeController::class, 'ProductDetails']);
+route::get('/shop', [HomeController::class, 'ShopPage'])->name('user.shop');
+route::get('/contact', [HomeController::class, 'ContactPage'])->name('user.contact');

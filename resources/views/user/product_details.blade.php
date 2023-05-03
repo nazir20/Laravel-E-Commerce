@@ -95,112 +95,111 @@
                                     <!-- Detail Info -->
                                 </div>
                             </div>
-                            <div class="tab-style3">
-                                <ul class="nav nav-tabs text-uppercase">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Product Details</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content shop_info_tab entry-main-content">
-                                    <div class="tab-pane fade show active" id="Additional-info">
-                                        <table class="font-md">
-                                            <tbody>
-                                                <tr>
-                                                    <th>Screen Size</th>
-                                                    <td>
-                                                        <p>{{$product->screen_size}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Graphics Card</th>
-                                                    <td>
-                                                        <p>{{$product->graphics_type}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Graphics Card Memory</th>
-                                                    <td>
-                                                        <p>{{$product->graphics_card_memory}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Processor Generation</th>
-                                                    <td>
-                                                        <p>{{$product->processor_generation}} Generation</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Processor Type</th>
-                                                    <td>
-                                                        <p>{{$product->processor_type}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Processor</th>
-                                                    <td>
-                                                        <p>{{$product->processor}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Operatin System</th>
-                                                    <td>
-                                                        <p>{{$product->operating_system}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Keyboard</th>
-                                                    <td>
-                                                        <p>{{$product->keyboard}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Processor Speed</th>
-                                                    <td>
-                                                        <p>{{$product->processor_speed}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Screen Resolution</th>
-                                                    <td>
-                                                        <p>{{$product->screen_resolution}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>RAM(System Memory)</th>
-                                                    <td>
-                                                        <p>{{$product->ram}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Color</th>
-                                                    <td>
-                                                        <p>{{$product->color}}</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>SSD Capacity</th>
-                                                    <td>
-                                                        <p>{{$product->ssd_capacity}}</p>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <section id="product-details">
+                                <div class="tab-style3">
+                                    <ul class="nav nav-tabs text-uppercase">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Product Details</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content shop_info_tab entry-main-content">
+                                        <div class="tab-pane fade show active" id="Additional-info">
+                                            <table class="font-md">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Screen Size</th>
+                                                        <td>
+                                                            <p>{{$product->screen_size}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Graphics Card</th>
+                                                        <td>
+                                                            <p>{{$product->graphics_type}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Graphics Card Memory</th>
+                                                        <td>
+                                                            <p>{{$product->graphics_card_memory}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Processor Generation</th>
+                                                        <td>
+                                                            <p>{{$product->processor_generation}} Generation</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Processor Type</th>
+                                                        <td>
+                                                            <p>{{$product->processor_type}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Processor</th>
+                                                        <td>
+                                                            <p>{{$product->processor}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Operatin System</th>
+                                                        <td>
+                                                            <p>{{$product->operating_system}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Keyboard</th>
+                                                        <td>
+                                                            <p>{{$product->keyboard}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Processor Speed</th>
+                                                        <td>
+                                                            <p>{{$product->processor_speed}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Screen Resolution</th>
+                                                        <td>
+                                                            <p>{{$product->screen_resolution}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>RAM(System Memory)</th>
+                                                        <td>
+                                                            <p>{{$product->ram}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Color</th>
+                                                        <td>
+                                                            <p>{{$product->color}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>SSD Capacity</th>
+                                                        <td>
+                                                            <p>{{$product->ssd_capacity}}</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>                          
+                                </div>      
+                            </section>                        
                         </div>
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
                         <div class="widget-category mb-30">
-                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
+                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">{{$product->category}}</h5>
                             <ul class="categories">
-                                <li><a href="shop.html">Shoes & Bags</a></li>
-                                <li><a href="shop.html">Blouses & Shirts</a></li>
-                                <li><a href="shop.html">Dresses</a></li>
-                                <li><a href="shop.html">Swimwear</a></li>
-                                <li><a href="shop.html">Beauty</a></li>
-                                <li><a href="shop.html">Jewelry & Watch</a></li>
-                                <li><a href="shop.html">Accessories</a></li>
+                                <li><span style="font-weight:bold">Processor: </span> {{$product->processor_type}} {{$product->processor}}</li>
+                                <li><span style="font-weight:bold">Operating System: </span>{{$product->operating_system}}</li>
+                                <li><span style="font-weight:bold">RAM: </span>{{$product->ram}}</li>
+                                <li><span style="font-weight:bold">SSD Capacity: </span>{{$product->ssd_capacity}}</li>
                             </ul>
                         </div>                        
                     </div>
