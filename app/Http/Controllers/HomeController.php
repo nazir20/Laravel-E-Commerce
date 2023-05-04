@@ -12,6 +12,9 @@ use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
+use Stripe;
+
 
 
 class HomeController extends Controller
@@ -200,7 +203,7 @@ class HomeController extends Controller
             $cartData = Cart::where('user_id', '=', $user_id)->get();
             return view('user.checkout', compact('cartData'));
         }else{
-            redirect('login');
+            return redirect('login');
         }
     }
 
@@ -307,6 +310,63 @@ class HomeController extends Controller
             $order->delete();
             return redirect()->back();
         } else {
+            return redirect('login');
+        }
+    }
+
+    public function Stripe($totalPrice)
+    {
+        if(Auth::check()){
+            return view('user.stripe', compact('totalPrice'));
+        }else{
+            return redirect('login');
+        }
+    }
+
+    public function StripePost(Request $request, $totalPrice)
+    {
+        if(Auth::check()){
+            Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            Stripe\Charge::create([
+                "amount" => $totalPrice * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "Thanks For Payment!"
+            ]);
+
+            $user = Auth::user();
+            $user_id = $user->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+
+            foreach ($cartData as $data) {
+
+                $order = new Order();
+                $order->user_id = $data->user_id;
+                $order->name = $data->name;
+                $order->email = $data->email;
+                $order->phone = $data->phone;
+                $order->address = $data->address;
+                $order->product_title = $data->product_title;
+                $order->product_id = $data->product_id;
+                $order->quantity = $data->quantity;
+                $order->price = $data->price;
+                $order->image = $data->image;
+                $order->tracking_id = 'TRK' . Str::limit(uniqid('', true), 15 - strlen('TRK'), '');
+                $order->delivery_status = 'pending';
+                $order->payment_status = 'paid';
+                $order->save();
+
+
+                $cart_id = $data->id;
+                $cart = Cart::find($cart_id);
+                $cart->delete();
+            }
+
+            Session::flash('success', 'Payment successful!');
+
+            return back();
+        }else{
             return redirect('login');
         }
     }

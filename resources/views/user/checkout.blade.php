@@ -80,7 +80,7 @@
                             </table>
                         </div>
                         <div class="cart-action text-end">
-                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Pay By Card</a>
+                            <a class="btn  mr-10 mb-sm-15" href="{{url('/stripe', $totalPrice)}}"><i class="fi-rs-shuffle mr-10"></i>Pay By Card</a>
                             <a class="btn " href="{{url('/cash-order')}}"><i class="fi-rs-shopping-bag mr-10"></i>Cash On Delivery</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
