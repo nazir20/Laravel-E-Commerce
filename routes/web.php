@@ -49,5 +49,6 @@ Route::get('/clear-cart', [HomeController::class, 'ClearCart'])->name('user.clea
 Route::get('/checkout', [HomeController::class,'Checkout'])->name('user.checkout');
 Route::get('/orders', [HomeController::class, 'UserOrders']);
 Route::get('/order-received/{id}', [HomeController::class, 'OrderReceived']);
+Route::get('/cancel-order/{id}', [HomeController::class, 'CancelOrder']);
 
 Route::get('/cash-order', [HomeController::class, 'CashOrder']);

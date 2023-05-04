@@ -60,7 +60,10 @@
                                             <span style="color: #2C3333; font-weight: 400;">{{$order->tracking_id}}</span>
                                         </td>
                                         <td class="product-des product-name px-5">
-                                            @if($order->delivery_status == 'processing')
+                                            @if($order->delivery_status == 'pending')
+                                                <i style="color: #54B435; font-size: 17px;" class="fas fa-check"></i>
+                                                <span class="product-name px-1">Pending</span>
+                                            @elseif($order->delivery_status == 'processing')
                                                 <i style="color: #54B435; font-size: 17px;" class="far fa-check-circle"></i>
                                                 <span class="product-name px-1">Your Product is Processing</span>
                                             @elseif($order->delivery_status == 'packaging')
@@ -87,8 +90,10 @@
                                         </td>
                                         <td class="action" data-title="View"><a href="#" class="text-muted"><i class="fas fa-eye"></i></a></td>
                                         <td>
-                                            @if($order->delivery_status == 'delivered')
-                                                <a class="btn" href="{{url('/order-received',$order->id)}}">I received my products</a>
+                                            @if($order->delivery_status == 'pending')
+                                                <a class="btn" href="{{url('/cancel-order',$order->id)}}"><i class="fas fa-trash"></i> Cancel Order</a>
+                                            @elseif($order->delivery_status == 'delivered')
+                                                <a class="btn" href="{{url('/order-received',$order->id)}}"> I received my products</a>
                                             @endif
                                         </td>
                                     </tr>

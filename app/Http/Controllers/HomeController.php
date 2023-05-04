@@ -210,7 +210,7 @@ class HomeController extends Controller
 
             $user = Auth::user();
             $user_id = $user->id;
-            $cartData = Cart::where('user_id','=',$user_id);
+            $cartData = Cart::where('user_id','=',$user_id)->get();
 
             foreach($cartData as $data){
 
@@ -226,7 +226,7 @@ class HomeController extends Controller
                 $order->price = $data->price;
                 $order->image = $data->image;
                 $order->tracking_id ='TRK' . Str::limit(uniqid('', true), 15 - strlen('TRK'), '');
-                $order->delivery_status = 'processing';
+                $order->delivery_status = 'pending';
                 $order->payment_status = 'cash_on_delivery';
                 $order->save();
 
@@ -277,6 +277,35 @@ class HomeController extends Controller
                 return redirect()->back()->with('error', 'Order not found.');
             }
 
+        } else {
+            return redirect('login');
+        }
+    }
+
+    public function CancelOrder($id)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            // Get the order that needs to be canceled
+            $order = Order::find($id);
+
+            // Create a new cart item for the canceled order
+            $cartItem = new Cart();
+            $cartItem->user_id = $user->id;
+            $cartItem->product_id = $order->product_id;
+            $cartItem->quantity = $order->quantity;
+            $cartItem->price = $order->price;
+            $cartItem->name = $user->name;
+            $cartItem->email = $user->email;
+            $cartItem->phone = $user->phone;
+            $cartItem->address = $user->address;
+            $cartItem->product_title = $order->product_title;
+            $cartItem->image = $order->image;
+            $cartItem->save();
+
+            // Delete the order
+            $order->delete();
+            return redirect()->back();
         } else {
             return redirect('login');
         }
