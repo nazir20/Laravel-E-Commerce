@@ -9,7 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
 
 
 class HomeController extends Controller
@@ -183,7 +185,7 @@ class HomeController extends Controller
 
     public function ClearCart()
     {
-        if (Auth::id()) {
+        if (Auth::check()) {
             Cart::where('user_id', Auth::id())->delete();
             return redirect()->back()->with('success', 'Cart cleared successfully!');
         } else {
@@ -191,4 +193,92 @@ class HomeController extends Controller
         }
     }
 
+    public function Checkout()
+    {
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.checkout', compact('cartData'));
+        }else{
+            redirect('login');
+        }
+    }
+
+    public function CashOrder()
+    {
+        if(Auth::check()){
+
+            $user = Auth::user();
+            $user_id = $user->id;
+            $cartData = Cart::where('user_id','=',$user_id);
+
+            foreach($cartData as $data){
+
+                $order = new Order();
+                $order->user_id = $data->user_id;
+                $order->name = $data->name;
+                $order->email = $data->email;
+                $order->phone = $data->phone;
+                $order->address = $data->address;
+                $order->product_title = $data->product_title;
+                $order->product_id = $data->product_id;
+                $order->quantity = $data->quantity;
+                $order->price = $data->price;
+                $order->image = $data->image;
+                $order->tracking_id ='TRK' . Str::limit(uniqid('', true), 15 - strlen('TRK'), '');
+                $order->delivery_status = 'processing';
+                $order->payment_status = 'cash_on_delivery';
+                $order->save();
+
+                
+                $cart_id = $data->id;
+                $cart = Cart::find($cart_id);
+                $cart->delete();
+                   
+            }
+
+            return redirect()->back();
+
+
+        }else{
+            redirect('login');
+        }
+    }
+
+    public function UserOrders()
+    {
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            $orderData = Order::where('user_id', '=', $user_id)->where('delivery_status', '<>', 'passive_order')->get();
+            $past_orders = Order::where('user_id', '=', $user_id)->where('delivery_status', '=', 'passive_order')->get();
+            return view('user.orders', compact('orderData', 'cartData','past_orders'));
+        } else {
+            return redirect('login');
+        }
+    }
+
+    public function OrderReceived($id)
+    {
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            // get the order you want to update the delivery status for
+            $order = Order::where('id', $id)->where('user_id', $user_id)->first();
+
+            if ($order) {
+                // update the delivery status
+                $order->delivery_status = 'passive_order';
+                $order->save();
+
+                // redirect back to the order page with a success message
+                return redirect()->back();
+            } else {
+                // if the order is not found, redirect back with an error message
+                return redirect()->back()->with('error', 'Order not found.');
+            }
+
+        } else {
+            return redirect('login');
+        }
+    }
 }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CyberMart | My Cart</title>
+    <title>CyberMart | Checkout</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
                 <div class="breadcrumb">
                     <a href="/" rel="nofollow">Home</a>
                     <span></span> Shop
-                    <span></span> Your Cart
+                    <span></span> Checkout
                 </div>
             </div>
         </div>
@@ -73,38 +73,17 @@
                                     @endforeach
                                     <tr>
                                         <td colspan="6" class="text-end">
-                                            <a href="{{route('user.clear_cart')}}" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear Cart</a>
+                                            <a href="{{route('user.clear_cart')}}" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear Order</a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="cart-action text-end">
-                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
-                            <a class="btn " href="{{route('user.shop')}}"><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
+                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Pay By Card</a>
+                            <a class="btn " href="{{url('/cash-order')}}"><i class="fi-rs-shopping-bag mr-10"></i>Cash On Delivery</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
-                        <div class="row mb-50">
-                            <div class="col-lg-6 col-md-12"></div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="border p-md-4 p-30 border-radius cart-totals">
-                                    <div class="heading_s1 mb-3">
-                                        <h4>Cart Totals</h4>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cart_total_label">Total</td>
-                                                    <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{$totalPrice}}</span></strong></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <a href="{{route('user.checkout')}}" class="btn"> <i class="fi-rs-box-alt mr-10"></i> Proceed to Checkout</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     @endif
                 </div>

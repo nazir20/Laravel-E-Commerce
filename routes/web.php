@@ -46,3 +46,8 @@ Route::post('/add-to-cart/{id}', [HomeController::class, 'AddToCart']);
 Route::get('/my-cart',[HomeController::class, 'CartPage'])->name('user.cart');
 Route::get('/remove-product-from-cart/{id}',[HomeController::class, 'RemoveProductFromCart']);
 Route::get('/clear-cart', [HomeController::class, 'ClearCart'])->name('user.clear_cart');
+Route::get('/checkout', [HomeController::class,'Checkout'])->name('user.checkout');
+Route::get('/orders', [HomeController::class, 'UserOrders']);
+Route::get('/order-received/{id}', [HomeController::class, 'OrderReceived']);
+
+Route::get('/cash-order', [HomeController::class, 'CashOrder']);

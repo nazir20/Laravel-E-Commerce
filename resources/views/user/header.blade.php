@@ -107,7 +107,7 @@
                                                 </div>
                                                 <div class="shopping-cart-button">
                                                     <a href="{{route('user.cart')}}" class="outline">View cart</a>
-                                                    <a href="checkout.html">Checkout</a>
+                                                    <a href="{{route('user.checkout')}}">Checkout</a>
                                                 </div>
                                             </div>
                                             @endif
@@ -159,7 +159,7 @@
                                                 <li><a href="#">Products</a></li>
                                                 <li><a href="#">Categories</a></li>
                                                 <li><a href="#">Coupons</a></li>
-                                                <li><a href="#">Orders</a></li>
+                                                <li><a href="{{url('/orders')}}">Orders</a></li>
                                                 <li><a href="#">Customers</a></li>
                                                 <li><a href="#">Logout</a></li>                                            
                                             </ul>
