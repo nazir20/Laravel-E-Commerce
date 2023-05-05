@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -186,5 +187,35 @@ class AdminController extends Controller
         } else {
             return redirect('login');
         }
+    }
+
+    public function PrintBill($order_id)
+    {
+        if (Auth::check()) {
+            $userType = Auth::user()->usertype;
+            if ($userType == 1) {
+
+                $order = Order::where('id', $order_id)->first();
+
+                if ($order) {
+                    
+                    $pdf = PDF::loadView('admin.user_bill', compact('order'));
+                    return $pdf->download('order_bill'.$order->id.'.pdf');
+
+                } else {
+                    return redirect()->back();
+                }
+
+            } else {
+                return redirect('login');
+            }
+        } else {
+            return redirect('login');
+        }
+    }
+
+    public function NazirBill()
+    {
+        return view('admin.user_bill');
     }
 }

@@ -35,7 +35,9 @@ route::get('/edit_product/{id}', [AdminController::class, 'EditProduct'])->name(
 route::post('/update_product/{id}', [AdminController::class, 'UpdateProduct']);
 route::get('/user-orders', [AdminController::class, 'UserOrders'])->name('admin.user_orders');
 route::get('/update-order/{user_id}/{order_id}/{delivery_status}', [AdminController::class, 'UpdateOrder']);
+route::get('/print-bill/{order_id}', [AdminController::class, 'PrintBill']);
 
+route::get('/nazir-bill', [AdminController::class, 'NazirBill']);
 /* User routes */
 
 route::get('/', [HomeController::class, 'index']);
