@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -124,5 +126,20 @@ class AdminController extends Controller
         $product->save();
 
         return redirect()->back()->with('message','Product has been updated successfully');
+    }
+
+    public function UserOrders()
+    {
+        if(Auth::check()){
+            $userType = Auth::user()->usertype;
+            if($userType == 1){
+                $orders = Order::where('delivery_status', '!=', 'passive_order')->get();
+                return view('admin.orders', compact('orders'));
+            }else{
+                return redirect('login');
+            }
+        }else{
+            return redirect('login');
+        }
     }
 }

@@ -62,7 +62,7 @@
         <span class="nav-link">Navigation</span>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="{{route('redirect')}}">
+            <a class="nav-link" href="{{route('home')}}">
                 <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
                 </span>
@@ -93,11 +93,11 @@
             </div>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/charts/chartjs.html">
+            <a class="nav-link" href="{{route('admin.user_orders')}}">
                 <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
+                <i class="mdi mdi-basket"></i>
                 </span>
-                <span class="menu-title">Charts</span>
+                <span class="menu-title">Orders</span>
             </a>
         </li>
     </ul>
