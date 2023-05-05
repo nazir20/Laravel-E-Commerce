@@ -41,7 +41,6 @@
                                     <th> Client Name </th>
                                     <th> Email </th>
                                     <th> Phone </th>
-                                    <th> Quantity </th>
                                     <th> Price </th>
                                     <th> Payment Status </th>
                                     <th> Delivery Status </th>
@@ -55,13 +54,25 @@
                                         <td>{{$order->name}}</td>
                                         <td>{{$order->email}}</td>
                                         <td>{{$order->phone}}</td>
-                                        <td>{{$order->quantity}}</td>
-                                        <td>{{$order->price}}</td>
+                                        <td>({{$order->quantity}}){{$order->price}}</td>
                                         <td>
                                             <div class="badge badge-outline-success">{{$order->payment_status}}</div>
                                         </td>
                                         <td>
-                                            <div class="badge badge-outline-success">{{$order->delivery_status}}</div>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                <button class="btn btn-sm btn-outline-warning dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$order->delivery_status}}</button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="{{ url('/update-order/'.$order->user_id.'/'.$order->id.'/processing') }}">Processing</a>
+                                                    <a class="dropdown-item" href="{{ url('/update-order/'.$order->user_id.'/'.$order->id.'/pending') }}">Pending</a>
+                                                    <a class="dropdown-item" href="{{ url('/update-order/'.$order->user_id.'/'.$order->id.'/packaging') }}">Packaging</a>
+                                                    <a class="dropdown-item" href="{{ url('/update-order/'.$order->user_id.'/'.$order->id.'/shipped') }}">Shipped</a>
+                                                    <a class="dropdown-item" href="{{ url('/update-order/'.$order->user_id.'/'.$order->id.'/on_the_way') }}">On The Way</a>
+                                                    <a class="dropdown-item" href="{{ url('/update-order/'.$order->user_id.'/'.$order->id.'/delivered') }}">Delivered</a>
+                                                    <a class="dropdown-item" href="{{ url('/update-order/'.$order->user_id.'/'.$order->id.'/cancel_order') }}">Cancel Order</a>  
+                                                </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <img src="products_images/{{$order->image}}" alt="image" />

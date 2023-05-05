@@ -34,6 +34,7 @@ route::get('/delete_product/{id}', [AdminController::class, 'DeleteProduct'])->n
 route::get('/edit_product/{id}', [AdminController::class, 'EditProduct'])->name('admin.edit_product');
 route::post('/update_product/{id}', [AdminController::class, 'UpdateProduct']);
 route::get('/user-orders', [AdminController::class, 'UserOrders'])->name('admin.user_orders');
+route::get('/update-order/{user_id}/{order_id}/{delivery_status}', [AdminController::class, 'UpdateOrder']);
 
 /* User routes */
 

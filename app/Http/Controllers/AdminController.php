@@ -133,12 +133,57 @@ class AdminController extends Controller
         if(Auth::check()){
             $userType = Auth::user()->usertype;
             if($userType == 1){
+
+                
+
                 $orders = Order::where('delivery_status', '!=', 'passive_order')->get();
                 return view('admin.orders', compact('orders'));
+
             }else{
                 return redirect('login');
             }
         }else{
+            return redirect('login');
+        }
+    }
+
+    public function UpdateOrder($user_id, $order_id,$delivery_status)
+    {
+        if (Auth::check()) {
+            $userType = Auth::user()->usertype;
+            if ($userType == 1) {
+
+                $order = Order::where('user_id', $user_id)->where('id', $order_id)->first();
+                
+                if($order){
+                    // the order was found, update the delivery status
+                    if($delivery_status == 'cancel_order'){
+                        $product = Product::find($order->product_id);
+                        if ($product) {
+                            // Update the quantity of the product in the products table
+                            $product->quantity += $order->quantity;
+                            $product->save();
+
+                            // Remove the product from the cart
+                            $order->delete();
+
+                            return redirect()->back();
+                        } else {
+                            return redirect()->back()->with('error', 'Product not found!');
+                        }
+                    }else{
+                        $order->delivery_status = $delivery_status;
+                        $order->save();
+                        return redirect()->back();
+                    }
+                }else{
+                    return redirect()->back();
+                }
+                
+            } else {
+                return redirect('login');
+            }
+        } else {
             return redirect('login');
         }
     }
