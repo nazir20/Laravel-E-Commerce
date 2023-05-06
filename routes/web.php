@@ -37,6 +37,9 @@ Route::get('/search-product', [AdminController::class, 'SearchProduct']);
 route::get('/user-orders', [AdminController::class, 'UserOrders'])->name('admin.user_orders');
 route::get('/update-order/{user_id}/{order_id}/{delivery_status}', [AdminController::class, 'UpdateOrder']);
 route::get('/print-bill/{order_id}', [AdminController::class, 'PrintBill']);
+route::get('/customers', [AdminController::class, 'Customers']);
+route::get('/delete-user/{id}', [AdminController::class, 'DeleteUser']);
+Route::get('/search-user', [AdminController::class, 'SearchUser']);
 
 route::get('/nazir-bill', [AdminController::class, 'NazirBill']);
 /* User routes */

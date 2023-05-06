@@ -84,7 +84,7 @@
                               <td colspan="16">
                                 <div class="text-center">
                                   <img style="width: 25%;height: 25%;" src="/user/assets/imgs/no-search-result.png" alt="no-search-result">
-                                  <h4>No Record Was Found!</h4>
+                                  <h4>No Product Was Found!</h4>
                                 </div>
                               </td>
                             </tr>

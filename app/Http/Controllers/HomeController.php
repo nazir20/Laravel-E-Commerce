@@ -37,7 +37,25 @@ class HomeController extends Controller
 
         $userType = Auth::user()->usertype;
         if($userType == '1'){
-            return view('admin.home');
+
+            $total_users = User::where('usertype', 0)->count();
+            $total_product = Product::all()->count();
+            $total_orders  = Order::all()->count();
+            $orders = Order::all();
+            $delivered_orders = Order::where('delivery_status','=','delivered')->orWhere('delivery_status', '=', 'passive_order')->count();
+            $processing_orders = Order::where('delivery_status', '!=', 'delivered')->orWhere('delivery_status', '!=', 'passive_order')->count();
+            $revenue = 0;
+            $sold_products = 0;
+
+            foreach($orders as $order){
+                $sold_products += $order->quantity;
+                if($order->payment_status == 'paid'){
+                    $revenue += $order->price;
+                }
+            }
+
+            return view('admin.home',compact('total_users','total_product','total_orders','delivered_orders','processing_orders','revenue','sold_products'));
+
         }else{
 
             $categories = Category::all();
