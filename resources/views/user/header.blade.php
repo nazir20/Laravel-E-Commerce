@@ -53,8 +53,9 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-1">
-                        <form action="#">                                
-                            <input type="text" placeholder="Search for items...">
+                        <form action="{{url('/search-a-product')}}" method="GET">
+                            @csrf                                
+                            <input type="text" name="search" placeholder="Search for products...">
                         </form>
                     </div>
                     <div class="header-action-right">

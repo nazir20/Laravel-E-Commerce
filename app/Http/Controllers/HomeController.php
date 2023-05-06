@@ -388,4 +388,19 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
+
+    public function SearchProduct(Request $request)
+    {
+        $searchText = $request->search;
+        $products  = Product::where('title', 'LIKE', "%$searchText%")->orWhere('ram', 'LIKE', "%$searchText%")->orWhere('category', 'LIKE', "%$searchText%")->get();
+        $categories = Category::all();
+        // check if a user is logged in
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.shop', compact('products', 'categories', 'cartData'));
+        } else {
+            return view('user.shop', compact('products', 'categories'));
+        }
+    }
 }
