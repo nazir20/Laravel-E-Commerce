@@ -41,7 +41,7 @@ route::get('/nazir-bill', [AdminController::class, 'NazirBill']);
 /* User routes */
 
 route::get('/', [HomeController::class, 'index']);
-route::get('/home', [HomeController::class, 'Home'])->name('home');
+route::get('/home', [HomeController::class, 'Home'])->name('home')->middleware('auth','verified');
 route::get('/user/logout', [HomeController::class, 'UserLogout'])->name('user.logout');
 Route::get('/product_details/{id}',[HomeController::class, 'ProductDetails']);
 Route::get('/shop', [HomeController::class, 'ShopPage'])->name('user.shop');
