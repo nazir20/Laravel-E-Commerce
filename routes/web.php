@@ -33,6 +33,7 @@ route::get('/show_product', [AdminController::class, 'ShowProduct'])->name('admi
 route::get('/delete_product/{id}', [AdminController::class, 'DeleteProduct'])->name('admin.delete_product');
 route::get('/edit_product/{id}', [AdminController::class, 'EditProduct'])->name('admin.edit_product');
 route::post('/update_product/{id}', [AdminController::class, 'UpdateProduct']);
+Route::get('/search-product', [AdminController::class, 'SearchProduct']);
 route::get('/user-orders', [AdminController::class, 'UserOrders'])->name('admin.user_orders');
 route::get('/update-order/{user_id}/{order_id}/{delivery_status}', [AdminController::class, 'UpdateOrder']);
 route::get('/print-bill/{order_id}', [AdminController::class, 'PrintBill']);

@@ -218,4 +218,21 @@ class AdminController extends Controller
     {
         return view('admin.user_bill');
     }
+
+    public function SearchProduct(Request $request)
+    {
+        if (Auth::check()) {
+            $userType = Auth::user()->usertype;
+            if ($userType == 1) {
+
+                $searchText = $request->search;
+                $products  = Product::where('title','LIKE',"%$searchText%")->orWhere('ram', 'LIKE', "%$searchText%")->orWhere('category', 'LIKE', "%$searchText%")->get();
+                return view('admin.show_product', compact('products'));
+            } else {
+                return redirect('login');
+            }
+        } else {
+            return redirect('login');
+        }
+    }
 }

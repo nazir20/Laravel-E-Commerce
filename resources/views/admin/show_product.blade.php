@@ -35,6 +35,10 @@
                     {{session()->get('message')}}
                 </div>
             @endif
+            <form action="{{url('/search-product')}}" class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" method="GET">
+              @csrf
+              <input type="text" name="search" class="form-control" placeholder="Search products" style="color: #fff">
+            </form>
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -56,14 +60,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($products as $product)
+                          @forelse($products as $product)
                             <tr>
                                 <td>
                                     <img src="products_images/{{$product->image}}" alt="image" />
                                 </td>
                                 <td>{{$product->category}}</td>
-                                <td style="color: orange">{{$product->price}}</td>
-                                <td class="text-success">{{$product->discount_price}} <i class="mdi mdi-arrow-up"></i></td>
+                                <td style="color: orange">${{$product->price}}</td>
+                                <td class="text-success">${{$product->discount_price}} <i class="mdi mdi-arrow-up"></i></td>
                                 <td class="text-danger">{{$product->quantity}}</td>
                                 <td>{{$product->processor_type}} {{$product->processor}}</td>
                                 <td>{{$product->ram}}</td>
@@ -75,7 +79,16 @@
                                     <a href="{{url('edit_product',$product->id)}}" style="font-size: 20px;color:#7149C6"><i class="mdi mdi-tooltip-edit"></i></a>
                                 </td>
                             </tr>
-                          @endforeach
+                            @empty
+                            <tr>
+                              <td colspan="16">
+                                <div class="text-center">
+                                  <img style="width: 25%;height: 25%;" src="/user/assets/imgs/no-search-result.png" alt="no-search-result">
+                                  <h4>No Record Was Found!</h4>
+                                </div>
+                              </td>
+                            </tr>
+                          @endforelse
                         </tbody>
                       </table>
                     </div>
