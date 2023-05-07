@@ -29,6 +29,10 @@
         @include('admin.navbar')
         <div class="main-panel">
           <div class="content-wrapper">
+            <form action="{{url('/search-order')}}" class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" method="GET">
+              @csrf
+              <input type="text" name="search" class="form-control" placeholder="Search By Tracking ID" style="color: #fff">
+            </form>
             <div class="row ">
                 <div class="col-12 grid-margin">
                     <div class="card">
@@ -38,7 +42,7 @@
                             <table class="table">
                             <thead>
                                 <tr>
-                                    <th> Client Name </th>
+                                    <th> Tracking ID </th>
                                     <th> Email </th>
                                     <th> Phone </th>
                                     <th> Price </th>
@@ -52,7 +56,7 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td>{{$order->name}}</td>
+                                        <td>{{$order->tracking_id}}</td>
                                         <td>{{$order->email}}</td>
                                         <td>{{$order->phone}}</td>
                                         <td>({{$order->quantity}}){{$order->price}}</td>

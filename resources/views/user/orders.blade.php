@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert');
     @include('user.header')
     @include('user.mobile_header')    
     <main class="main">
@@ -35,7 +36,10 @@
                 <div class="row">
                     @if ($orderData->isEmpty())
                     {{-- this part will be updated --}}
-                    <h1>Cart is empty</h1>
+                    <div class="text-center">
+                        <h1>No Order Yet!</h1>
+                        <img style="width: 25%" src="/user/assets/imgs/empty-cart-img.png" alt="">
+                    </div>
                     @else
                     <div class="col-12 mb-100">
                         <div class="table-responsive">

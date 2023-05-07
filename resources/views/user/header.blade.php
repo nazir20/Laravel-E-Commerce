@@ -155,9 +155,10 @@
                                 <li><a class="active" href="{{url('/')}}">Home </a></li>
                                 <li><a href="{{route('user.shop')}}">Shop</a></li>                             
                                 <li><a href="{{route('user.contact')}}">Contact</a></li>
+                                <li><a href="{{route('news')}}">News</a></li>
                                 @if (Route::has('login'))
                                     @auth
-                                        <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
+                                        <li><a href="{{route('user.account')}}">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
                                                 <li><a href="{{route('user.account')}}">Dashboard</a></li>
                                                 <li><a href="{{url('/orders')}}">Orders</a></li>

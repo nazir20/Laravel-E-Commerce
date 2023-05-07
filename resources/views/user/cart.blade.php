@@ -36,7 +36,10 @@
                 <div class="row">
                     @if ($cartData->isEmpty())
                     {{-- this part will be updated --}}
-                    <h1>Cart is empty</h1>
+                    <div class="text-center">
+                        <h1>Cart is empty</h1>
+                        <img style="width: 25%" src="/user/assets/imgs/empty-cart-img.png" alt="">
+                    </div>
                     @else
                     <?php $totalPrice = 0; ?>
                     <div class="col-12">

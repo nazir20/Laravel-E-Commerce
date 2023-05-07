@@ -23,18 +23,14 @@
     <link rel="shortcut icon" href="admin/assets/images/favicon.png" />
   </head>
   <body>
+    @include('sweetalert::alert');
     <div class="container-scroller">
       @include('admin.sidebar')
       <div class="container-fluid page-body-wrapper">
         @include('admin.navbar')
         <div class="main-panel">
           <div class="content-wrapper">
-            @if(session()->has('message'))
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                    {{session()->get('message')}}
-                </div>
-            @endif
+            
             <form action="{{url('/search-product')}}" class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" method="GET">
               @csrf
               <input type="text" name="search" class="form-control" placeholder="Search products" style="color: #fff">

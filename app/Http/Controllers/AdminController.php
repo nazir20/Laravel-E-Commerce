@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -62,8 +63,8 @@ class AdminController extends Controller
         $request->image->move('products_images', $imageName);
         $product->image = $imageName;
         $product->save();
-
-        return redirect()->back()->with('message','Product added successfully');
+        Alert::success('Product Added Successfully!', 'You have added a new product');
+        return redirect()->route('admin.show_product');
 
     }
 
@@ -75,7 +76,7 @@ class AdminController extends Controller
 
     public function ShowProduct()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id', 'desc')->get();
         return view('admin.show_product', compact('products'));
     }
 
@@ -127,8 +128,8 @@ class AdminController extends Controller
             $product->image = $product->image;
         }
         $product->save();
-
-        return redirect()->back()->with('message','Product has been updated successfully');
+        Alert::success('Successfully Updated', 'The product has been successfully updated!');
+        return redirect()->route('admin.show_product');
     }
 
     public function UserOrders()
@@ -216,11 +217,6 @@ class AdminController extends Controller
         }
     }
 
-    public function NazirBill()
-    {
-        return view('admin.user_bill');
-    }
-
     public function SearchProduct(Request $request)
     {
         if (Auth::check()) {
@@ -230,6 +226,23 @@ class AdminController extends Controller
                 $searchText = $request->search;
                 $products  = Product::where('title','LIKE',"%$searchText%")->orWhere('ram', 'LIKE', "%$searchText%")->orWhere('category', 'LIKE', "%$searchText%")->get();
                 return view('admin.show_product', compact('products'));
+            } else {
+                return redirect('login');
+            }
+        } else {
+            return redirect('login');
+        }
+    }
+
+    public function SearchOrder(Request $request)
+    {
+        if (Auth::check()) {
+            $userType = Auth::user()->usertype;
+            if ($userType == 1) {
+
+                $searchText = $request->search;
+                $orders  = Order::where('tracking_id', 'LIKE', "%$searchText%")->where('delivery_status', '!=', 'passive_order')->get();
+                return view('admin.orders', compact('orders'));
             } else {
                 return redirect('login');
             }

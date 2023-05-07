@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <h6 class="text-muted font-weight-normal">Total Orders</h6>
+                <h6 class="text-muted font-weight-normal">Total Active Orders</h6>
                 </div>
             </div>
         </div>

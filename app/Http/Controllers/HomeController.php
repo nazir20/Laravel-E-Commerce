@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Stripe;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Http;
 
 
 
@@ -40,11 +41,15 @@ class HomeController extends Controller
         if($userType == '1'){
 
             $total_users = User::where('usertype', 0)->count();
-            $total_product = Product::all()->count();
-            $total_orders  = Order::all()->count();
+            $products = Product::all();
+            $total_product = 0;
+            foreach($products as $product){
+                $total_product += $product->quantity;
+            }
+            $total_orders  = Order::where('delivery_status','!=','passive_order')->count();
             $orders = Order::all();
             $delivered_orders = Order::where('delivery_status','=','delivered')->orWhere('delivery_status', '=', 'passive_order')->count();
-            $processing_orders = Order::where('delivery_status', '!=', 'delivered')->orWhere('delivery_status', '!=', 'passive_order')->count();
+            $processing_orders = Order::where('delivery_status', '!=', 'passive_order')->count();
             $revenue = 0;
             $sold_products = 0;
 
@@ -145,7 +150,8 @@ class HomeController extends Controller
 
             /* check if the requested quantity is more then stock quantity */
             if($request->quantity > $product->quantity){
-                return redirect()->back()->with('message', 'The requested quantity for this product exceeds the available stock. We have only '.$product->quantity.' of this product in out stock.');
+                Alert::warning('Adding product failed!', 'The requested quantity for this product exceeds the available stock. We have only ' . $product->quantity . ' of this product in out stock.');
+                return redirect()->back();
             }else{
                 /* check if product already exits in the card
                 in this case just the quantity and price should be updated
@@ -274,8 +280,8 @@ class HomeController extends Controller
                 $cart->delete();
                    
             }
-
-            return redirect()->back();
+            Alert::success('your order has been received', 'Your order has been received');
+            return redirect()->route('user.orders');
 
 
         }else{
@@ -343,6 +349,7 @@ class HomeController extends Controller
 
             // Delete the order
             $order->delete();
+            Alert::success('Order Cancelled!', 'The Order Has Been Successfully Cancelled');
             return redirect()->back();
         } else {
             return redirect('login');
@@ -399,8 +406,9 @@ class HomeController extends Controller
             }
 
             Session::flash('success', 'Payment successful!');
+            Alert::success('Payment Successfully Done!', 'Your order has been received');
 
-            return back();
+            return redirect()->route('user.orders');
         }else{
             return redirect('login');
         }
@@ -423,6 +431,27 @@ class HomeController extends Controller
 
     public function UpdatePassword()
     {
-        return view('profile.update-profile-information-form');
+        if(Auth::check()){
+            return view('profile.update-profile-information-form');
+        }else{
+            return redirect('login');
+        }
     }
+
+    public function GetTechnologyNews()
+    {
+        $apiKey = env('NEWS_API_KEY');
+        $response = Http::get("https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=4&apiKey={$apiKey}");
+        $data = $response->json();
+        $articles = $data['articles'];
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $cartData = Cart::where('user_id', '=', $user_id)->get();
+            return view('user.news', compact('articles','cartData'));
+        }else{
+            return view('user.news', compact('articles'));
+        }
+
+    }
+
 }
