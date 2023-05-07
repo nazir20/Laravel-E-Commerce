@@ -14,9 +14,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="user/assets/imgs/theme/favicon.ico">
     <link rel="stylesheet" href="user/assets/css/main.css">
     <link rel="stylesheet" href="user/assets/css/custom.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
+    
     @include('user.header')
     @include('user.mobile_header')    
     <main class="main">
@@ -66,7 +68,7 @@
                                         <td class="text-right" data-title="Cart">
                                             <span>${{$cart->price}}</span>
                                         </td>
-                                        <td class="action" data-title="Remove"><a href="{{url('remove-product-from-cart',$cart->id)}}" class="text-muted"><i class="fi-rs-trash"></i></a></td>
+                                        <td class="action" data-title="Remove"><a onclick="confirmation(event)" href="{{url('remove-product-from-cart',$cart->id)}}" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                                     </tr>
                                     {{-- update the total price --}}
                                     <?php $totalPrice += $cart->price ?>
@@ -80,8 +82,8 @@
                             </table>
                         </div>
                         <div class="cart-action text-end">
-                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
                             <a class="btn " href="{{route('user.shop')}}"><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
+                            <a href="{{route('user.checkout')}}" class="btn"> <i class="fi-rs-box-alt mr-10"></i> Proceed to Checkout(${{$totalPrice}})</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                         <div class="row mb-50">
@@ -137,5 +139,23 @@
     <!-- Template  JS -->
     <script src="user/assets/js/main.js?v=3.3"></script>
     <script src="user/assets/js/shop.js?v=3.3"></script></body>
+    <script>
+        function confirmation(ev){
+            ev.preventDefault();
+            var urlToRedirect = ev.currentTarget.getAttribute('href');
+            swal({
+                title: 'Are you sure to cancel this product',
+                text: 'You will not be able to revert this',
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true
+            }).then((willCancel)=>{
+                if(willCancel){
+                    window.location.href = urlToRedirect;
+                }
+            })
+            
+        }
+    </script>
 
 </html>

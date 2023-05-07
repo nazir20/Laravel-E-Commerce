@@ -1,8 +1,9 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            
         </x-slot>
+        <img src="/user/assets/imgs/logo/app_logo.png" alt="">
 
         <x-validation-errors class="mb-4" />
 

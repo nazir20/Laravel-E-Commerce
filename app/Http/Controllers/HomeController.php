@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Stripe;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 
@@ -65,6 +66,22 @@ class HomeController extends Controller
             return view('user.index', compact('products', 'categories','cartData'));
         }
 
+    }
+
+    public function UserAccount()
+    {
+        if (Auth::check()) {
+            $userType = Auth::user()->usertype;
+            if ($userType == 0) {
+                $user = Auth::user();
+                $cartData = Cart::where('user_id', '=', $user->id)->get();
+                return view('user.my-account',compact('user','cartData'));
+            } else {
+                return redirect('login');
+            }
+        } else {
+            return redirect('login');
+        }
     }
 
     public function UserLogout(Request $request): RedirectResponse
@@ -158,7 +175,7 @@ class HomeController extends Controller
                 // update the quantity in products table
                 $product->quantity -= $request->quantity;
                 $product->save();
-
+                Alert::success('Product Added Successfully!','We have added product to cart');
                 return redirect()->back();
             }
 
@@ -402,5 +419,10 @@ class HomeController extends Controller
         } else {
             return view('user.shop', compact('products', 'categories'));
         }
+    }
+
+    public function UpdatePassword()
+    {
+        return view('profile.update-profile-information-form');
     }
 }

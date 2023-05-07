@@ -57,6 +57,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     @include('user.header')
     @include('user.mobile_header')    
     <main class="main">

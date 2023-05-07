@@ -9,12 +9,12 @@
                             <h2 class="animated fw-900">Supper value deals</h2>
                             <h1 class="animated fw-900 text-brand">On all products</h1>
                             <p class="animated">Save more with coupons & up to 70% off</p>
-                            <a class="animated btn btn-brush btn-brush-3" href="product-details.html"> Shop Now </a>
+                            <a class="animated btn btn-brush btn-brush-3" href="{{route('user.shop')}}"> Shop Now </a>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-6">
                         <div class="single-slider-img single-slider-img-1">
-                            <img class="animated slider-1-1" src="user/assets/imgs/slider/slider-1.png" alt="">
+                            <img class="animated slider-1-1" src="user/assets/imgs/slider/slider-01.jpg" alt="">
                         </div>
                     </div>
                 </div>
@@ -26,10 +26,10 @@
                     <div class="col-lg-5 col-md-6">
                         <div class="hero-slider-content-2">
                             <h4 class="animated">Hot promotions</h4>
-                            <h2 class="animated fw-900">Fashion Trending</h2>
+                            <h2 class="animated fw-900">PC Trending</h2>
                             <h1 class="animated fw-900 text-7">Great Collection</h1>
                             <p class="animated">Save more with coupons & up to 20% off</p>
-                            <a class="animated btn btn-brush btn-brush-2" href="product-details.html"> Discover Now </a>
+                            <a class="animated btn btn-brush btn-brush-2" href="{{route('user.shop')}}"> Discover Now </a>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-6">

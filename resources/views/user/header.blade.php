@@ -122,10 +122,13 @@
                                         <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                             <div class="shopping-cart-footer">
                                                 <div class="shopping-cart-total">
-                                                    <h4>You need to login first!</h4>
-                                                </div>
-                                                <div class="shopping-cart-button">
-                                                    <a href="{{route('login')}}" class="outline">Login</a>
+                                                    <center>
+                                                        <img style="width: 50%" src="/user/assets/imgs/empty-cart-img.png" alt="">
+                                                        <h4>You need to login first!</h4>
+                                                        <div class="shopping-cart-button">
+                                                            <a href="{{route('login')}}" class="outline">Login</a>
+                                                        </div>
+                                                    </center>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,13 +159,9 @@
                                     @auth
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
-                                                <li><a href="#">Dashboard</a></li>
-                                                <li><a href="#">Products</a></li>
-                                                <li><a href="#">Categories</a></li>
-                                                <li><a href="#">Coupons</a></li>
+                                                <li><a href="{{route('user.account')}}">Dashboard</a></li>
                                                 <li><a href="{{url('/orders')}}">Orders</a></li>
-                                                <li><a href="#">Customers</a></li>
-                                                <li><a href="#">Logout</a></li>                                            
+                                                <li><a href="{{ route('user.logout') }}">Logout</a></li>                                            
                                             </ul>
                                         </li>
                                     @endauth

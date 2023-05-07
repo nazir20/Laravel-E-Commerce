@@ -16,11 +16,11 @@ use App\Http\Controllers\AdminController;
 */
 
 
-/*
+
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
-    Route::get('/', function () { return view('index');})->name('index');
+    route::get('/dashboard', [HomeController::class, 'Home'])->name('dashboard');
 });
-*/
+
 
 /* Admin Routes */
 
@@ -41,11 +41,11 @@ route::get('/customers', [AdminController::class, 'Customers']);
 route::get('/delete-user/{id}', [AdminController::class, 'DeleteUser']);
 Route::get('/search-user', [AdminController::class, 'SearchUser']);
 
-route::get('/nazir-bill', [AdminController::class, 'NazirBill']);
 /* User routes */
 
 route::get('/', [HomeController::class, 'index']);
 route::get('/home', [HomeController::class, 'Home'])->name('home')->middleware('auth','verified');
+route::get('/my-account', [HomeController::class, 'UserAccount'])->name('user.account');
 route::get('/user/logout', [HomeController::class, 'UserLogout'])->name('user.logout');
 Route::get('/product_details/{id}',[HomeController::class, 'ProductDetails']);
 Route::get('/shop', [HomeController::class, 'ShopPage'])->name('user.shop');
@@ -59,6 +59,7 @@ Route::get('/orders', [HomeController::class, 'UserOrders']);
 Route::get('/order-received/{id}', [HomeController::class, 'OrderReceived']);
 Route::get('/cancel-order/{id}', [HomeController::class, 'CancelOrder']);
 Route::get('/search-a-product', [HomeController::class, 'SearchProduct']);
+Route::get('/update-password', [HomeController::class, 'UpdatePassword']);
 
 
 Route::get('/cash-order', [HomeController::class, 'CashOrder']);
