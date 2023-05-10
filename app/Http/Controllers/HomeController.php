@@ -38,20 +38,24 @@ class HomeController extends Controller
     public function Home(){
 
         $userType = Auth::user()->usertype;
+
+        /* Admin User */
         if($userType == '1'){
 
             $total_users = User::where('usertype', 0)->count();
             $products = Product::all();
             $total_product = 0;
+            $revenue = 0;
+            $sold_products = 0;
+
             foreach($products as $product){
                 $total_product += $product->quantity;
             }
+
             $total_orders  = Order::where('delivery_status','!=','passive_order')->count();
             $orders = Order::all();
             $delivered_orders = Order::where('delivery_status','=','delivered')->orWhere('delivery_status', '=', 'passive_order')->count();
             $processing_orders = Order::where('delivery_status', '!=', 'passive_order')->count();
-            $revenue = 0;
-            $sold_products = 0;
 
             foreach($orders as $order){
                 $sold_products += $order->quantity;
@@ -60,15 +64,25 @@ class HomeController extends Controller
                 }
             }
 
-            return view('admin.home',compact('total_users','total_product','total_orders','delivered_orders','processing_orders','revenue','sold_products'));
+            return view('admin.home',compact(
+                'total_users',
+                'total_product',
+                'total_orders',
+                'delivered_orders',
+                'processing_orders',
+                'revenue',
+                'sold_products'
+            ));
 
         }else{
 
+            /* Regular User */
             $categories = Category::all();
             $products = Product::all();
             $user_id = Auth::user()->id;
             $cartData = Cart::where('user_id', '=', $user_id)->get();
             return view('user.index', compact('products', 'categories','cartData'));
+            
         }
 
     }
