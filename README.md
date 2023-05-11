@@ -23,32 +23,34 @@ A Computer Selling Wesbsite(E-Commerce) with Laravel 10.x
 ## Screenshots
 
 <h3>Home Page of the Web</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/homepage.png)
+
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/homepage.png'>
+
 
 <h3>Shop Page of the Web</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/shop.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/shop.png'>
 
 <h3>Product Page of the Web</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/products.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/products.png'>
 
 <h3>Product Details Page of the Web</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/product-details.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/product-details.png'>
 
 <h3>User Cart Page of the Web</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/cart.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/cart.png'>
 
 <h3>Payment With Cart Page</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/payment.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/payment.png'>
 
 <h3>Payment with Strip API</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/stripe%20payment.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/stripe%20payment.png'>
 
 <h3>User Verify Email</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/verify%20email.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/verify%20email.png'>
 
 <h3>Admin Dashboard</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/admin%20dashboard.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/admin%20dashboard.png'>
 
 <h3>Add Product Page</h3>
-![App Screenshot](https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/add%20product.png)
+<img src='https://github.com/nazir20/Laravel-E-Commerce/blob/main/screenshots/add%20product.png'>
 
